@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+import os
 
 passed = False
 param =float( input())
@@ -27,5 +28,20 @@ metrics ={
 	"bad": [1, 2, 3]
 }
 
-with open("metrics.json", 'w') as f:
-	json.dump(metrics, f, indent = 2)
+metrics_path = "metrics.json"
+
+if os.path.exists(metrics_path):
+	with open(metrics_path, 'r') as f:
+		history = json.load(f)
+else:
+	history = []
+
+if not isinstance(history, list):
+	history = []
+
+history.append(metrics)
+
+with open(metrics_path, 'w') as f:
+	json.dump(history, f, indent = 2)
+
+
