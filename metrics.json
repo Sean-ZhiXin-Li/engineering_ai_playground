@@ -8,6 +8,31 @@
       1,
       2,
       3
-    ]
+    ],
+    "failure_reason": "legacy_missing_reason"
+  },
+  {
+    "param": 0.2,
+    "value": 0.8,
+    "passed": false,
+    "timestamp": "2025-12-28T15:46:44.238283",
+    "bad": [
+      1,
+      2,
+      3
+    ],
+    "failure_reason": "param <= 1"
+  },
+  {
+    "param": 0.6,
+    "value": 0.4,
+    "passed": false,
+    "timestamp": "2025-12-28T15:58:01.172033",
+    "bad": [
+      1,
+      2,
+      3
+    ],
+    "failure_reason": "param <= 1"
   }
 ]
