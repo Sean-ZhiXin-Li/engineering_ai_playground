@@ -12,3 +12,20 @@
 - Error: None (schema check prevented `append` on a non-list type).
 - Fix: After `json.load`, validate `history` with `isinstance(history, list)`. If not a list, reset `history = []` before appending.
 - Lesson: Never assume persisted JSON schema is correct. Always validate root type (list vs dict) before mutating metrics history.
+
+## Debug #003 — Failure without semantic explanation
+
+- Trigger:
+  Ran `test.py` with input values `param <= 1`, resulting in failed runs.
+
+- Symptom:
+  Metrics only recorded `passed = false` without explaining why the failure occurred.
+
+- Error:
+  No exception was raised; the problem was missing semantic information about the failure.
+
+- Fix:
+  Added a `failure_reason` field to each metrics record, and backfilled legacy records with `legacy_missing_reason`.
+
+- Lesson:
+  A boolean flag is not enough in engineering logs; failures must be explicitly and semantically labeled.
