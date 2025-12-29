@@ -14,11 +14,10 @@ if param > 1:
 else:
 	failure_reason = "param <= 1"
 
-if a + b == c:
+if passed:
 	print("Hello Engineering World!!!")
 else:
-	print("Well, you need to check your numbers, ensure you can into a real engineering world")
-
+	print("ENTER FAILURE MODE")
 timestamp = datetime.now().isoformat()
 metrics ={
 	"param": param,

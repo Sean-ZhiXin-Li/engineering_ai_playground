@@ -34,5 +34,29 @@
       3
     ],
     "failure_reason": "param <= 1"
+  },
+  {
+    "param": 0.2,
+    "value": 0.8,
+    "passed": false,
+    "timestamp": "2025-12-29T15:24:45.498581",
+    "bad": [
+      1,
+      2,
+      3
+    ],
+    "failure_reason": "param <= 1"
+  },
+  {
+    "param": 22.0,
+    "value": 21.0,
+    "passed": true,
+    "timestamp": "2025-12-29T15:25:50.828464",
+    "bad": [
+      1,
+      2,
+      3
+    ],
+    "failure_reason": null
   }
 ]
