@@ -29,3 +29,14 @@
 
 - Lesson:
   A boolean flag is not enough in engineering logs; failures must be explicitly and semantically labeled.
+
+## Debug #004 — Failure state ignored by control flow
+- Trigger: param=0.2 (passed=False)
+
+- Symptom: failure path printed same as success (no behavior        difference)
+
+- Error: control flow did not branch on passed
+
+- Fix: if passed: ... else: ... (failure mode message)
+
+- Lesson: failure must affect decisions, not just logs
