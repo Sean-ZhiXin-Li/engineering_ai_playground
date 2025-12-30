@@ -31,6 +31,102 @@ This repository is meant to stay simple so that **thinking, debugging, and struc
 
 ---
 
+## What This Repo Does (Current Phase)
+
+At the current stage (Phase A), the repository contains a single executable script:
+
+* `test.py`
+
+The script:
+
+1. Reads **one numeric input** from standard input
+2. Executes a clear **success / failure branch**
+3. Prints **explicit console signals** for both paths
+4. Appends a structured record to `metrics.json`
+
+Every run leaves a **persistent, inspectable trace**.
+Nothing is implicit.
+
+---
+
+## Behavior Summary
+
+Input parameter `param` determines execution flow:
+
+* **Success path**: `param > 1`
+* **Failure path**: `param <= 1`
+
+Both paths:
+
+* Print a visible console message
+* Append exactly one record to `metrics.json`
+
+---
+
+## Minimal Reproduction (Day5)
+
+Environment: Python 3.x on Linux / WSL. No extra dependencies.
+
+### Reproduce failure
+
+```bash
+python test.py
+# input: 0.2
+```
+
+Expected:
+
+* Console prints:
+
+  ```
+  ENTER FAILURE MODE
+  ```
+* File `metrics.json` appends a new record with:
+
+  ```json
+  "passed": false,
+  "failure_reason": "param <= 1"
+  ```
+
+---
+
+### Reproduce success
+
+```bash
+python test.py
+# input: 2
+```
+
+Expected:
+
+* Console prints:
+
+  ```
+  1.0
+  Hello Engineering World!!!
+  ```
+* File `metrics.json` appends a new record with:
+
+  ```json
+  "passed": true,
+  "failure_reason": null
+  ```
+
+---
+
+### Verify
+
+```bash
+tail -n 40 metrics.json
+```
+
+You should see a JSON list.
+The **last entry corresponds to the most recent run**.
+
+No code inspection is required to validate correctness.
+
+---
+
 ## Training Roadmap (High-Level)
 
 The work in this repository follows a fixed, time-bounded plan:
@@ -78,44 +174,11 @@ The work in this repository follows a fixed, time-bounded plan:
 
 ---
 
-### Phase D — Maintenance & Low Frequency (3/24 – 5月)
+### Phase D — Maintenance & Low Frequency (3/24 – 5)
 
 * Reduced cadence due to AP exams
 * Refactoring, documentation, and bug fixes only
 * No new features or models
-
----
-
-## What This Repo Is (and Is Not)
-
-### This repo **is**:
-
-* A transparent engineering learning record
-* A place where early-stage code and mistakes are preserved
-* A controlled environment to build confidence with Python + Linux
-
-### This repo **is not**:
-
-* A research paper
-* A performance benchmark
-* A large framework or system
-* A place for advanced or fancy models
-
-Those belong in other repositories.
-
----
-
-## How to Run (Current Stage)
-
-At the current stage, the repository contains minimal runnable scripts.
-
-Example:
-
-```bash
-python test.py
-```
-
-Follow the prompt to enter a numeric value.
 
 ---
 
@@ -128,16 +191,17 @@ This repository values:
 * Reproducibility over convenience
 * Debugging over avoidance
 
-Mistakes are expected and documented as part of the training process.
+Mistakes are expected and preserved as part of the training process.
 
 ---
 
 ## Status
 
-This repository evolves incrementally.
-Each phase has explicit scope limits to prevent uncontrolled growth.
+* Phase: **A — Foundations**
+* Scope: **Frozen**
+* Focus: **Failure semantics, traceability, reproducibility**
 
-Progress is measured by **engineering confidence and reproducibility**, not by feature count.
+Complexity is added only when explicitly scheduled.
 
 ---
 
