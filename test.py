@@ -2,6 +2,8 @@ import json
 from datetime import datetime
 import os
 
+FAILURE_PARAM_LE_1 = "param_le_1"
+FAILURE_LEGACY_MISSING_REASON = "legacy_missing_reason"
 passed = False
 failure_reason = None
 param =float( input())
@@ -12,7 +14,7 @@ if param > 1:
 	print(abs(param - 1))
 	passed = True
 else:
-	failure_reason = "param <= 1"
+	failure_reason = FAILURE_PARAM_LE_1
 
 if passed:
 	print("Hello Engineering World!!!")
@@ -41,7 +43,7 @@ if not isinstance(history, list):
 
 for rec in history:
 	if "failure_reason" not in rec:
-		rec["failure_reason"] = None if rec["passed"] else "legacy_missing_reason"
+		rec["failure_reason"] = None if rec["passed"] else FAILURE_LEGACY_MISSING_REASON
 
 history.append(metrics)
 
