@@ -1,6 +1,6 @@
 # engineering_ai_playground
 
-A **personal engineering training ground** for building solid, long‑term capability in:
+A **personal engineering training ground** for building solid, long-term capability in:
 
 * Python engineering (from scratch, not templates)
 * Linux-based development workflow (WSL)
@@ -46,6 +46,25 @@ The script:
 
 Every run leaves a **persistent, inspectable trace**.
 Nothing is implicit.
+
+---
+
+## Failure Aggregation (Phase A)
+
+### Verified entry point
+
+To generate and verify failure aggregation results:
+
+```bash
+./scripts/run_failure_aggregation_v1.sh
+```
+
+This entry point:
+
+* generates `analysis/failure_counts.json`
+* verifies count invariants against `metrics.json`
+
+Contract details: `notes/failure_aggregation_contract_v1.md`
 
 ---
 
