@@ -40,3 +40,9 @@
 - Fix: if passed: ... else: ... (failure mode message)
 
 - Lesson: failure must affect decisions, not just logs
+
+## Debug #005 — Phase A audit under failure and success paths
+
+- Injected condition: <a valid float that triggers failure mode> and <a valid float that triggers success path> (two separate runs).
+- Observed behavior: failure path entered; success path entered; metrics.json appended on each run; aggregation verified via ./scripts/run_failure_aggregation_v1.sh (VERIFY OK).
+- Invariant check result: metrics.json append-only preserved; every failed record has failure_reason (none missing / none None); sum(failure_counts) == number of failed records; verification passed.
