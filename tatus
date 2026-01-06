@@ -1,0 +1,14 @@
+[1mdiff --git a/notes/debug_log.md b/notes/debug_log.md[m
+[1mindex afb77a5..0669b73 100644[m
+[1m--- a/notes/debug_log.md[m
+[1m+++ b/notes/debug_log.md[m
+[36m@@ -40,3 +40,9 @@[m
+ - Fix: if passed: ... else: ... (failure mode message)[m
+ [m
+ - Lesson: failure must affect decisions, not just logs[m
+[32m+[m
+[32m+[m[32m## Debug #005 — Phase A audit under failure and success paths[m
+[32m+[m
+[32m+[m[32m- Injected condition: <a valid float that triggers failure mode> and <a valid float that triggers success path> (two separate runs).[m
+[32m+[m[32m- Observed behavior: failure path entered; success path entered; metrics.json appended on each run; aggregation verified via ./scripts/run_failure_aggregation_v1.sh (VERIFY OK).[m
+[32m+[m[32m- Invariant check result: metrics.json append-only preserved; every failed record has failure_reason (none missing / none None); sum(failure_counts) == number of failed records; verification passed.[m
