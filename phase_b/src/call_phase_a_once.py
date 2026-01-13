@@ -1,16 +1,21 @@
 from pathlib import Path
 import subprocess
+import datetime as dt
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+STDIN_VALUE = "2.0"
+
+def timestamp() -> str:
+    return dt.datetime.now().strftime("%Y%m%d_%H%M%S")
 
 print(REPO_ROOT)
 PHASE_A_ENTRY = REPO_ROOT / "scripts" / "run_failure_aggregation_v1.sh"
-EXP_DIR = REPO_ROOT / "phase_b" / "experiments" / "day16_call_test"
-EXP_DIR.mkdir(parents = True, exist_ok = True)
+EXP_DIR = (REPO_ROOT / "phase_b" / "experiments" / f"day17_call_{timestamp()}")
+EXP_DIR.mkdir(parents=True, exist_ok=True)
 
 proc = subprocess.run(
     ["bash", str(PHASE_A_ENTRY)],
-    input = b"2.0\n",
+    input = (STDIN_VALUE + '\n').encode("utf-8"),
     stdout = subprocess.PIPE,
     stderr = subprocess.PIPE,
     cwd = str(REPO_ROOT),
