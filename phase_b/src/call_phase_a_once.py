@@ -1,9 +1,13 @@
 from pathlib import Path
 import subprocess
 import datetime as dt
+import json
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-STDIN_VALUE = "2.0"
+CONFIG_PATH = REPO_ROOT / "phase_b" / "config" / "day18.json"
+with open(CONFIG_PATH, 'r') as f:
+    config = json.load(f)
+STDIN_VALUE = config["stdin_value"]
 
 def timestamp() -> str:
     return dt.datetime.now().strftime("%Y%m%d_%H%M%S")
