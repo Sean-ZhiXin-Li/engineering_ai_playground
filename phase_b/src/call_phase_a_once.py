@@ -13,9 +13,11 @@ STDIN_VALUE = config["stdin_value"]
 def timestamp() -> str:
     return dt.datetime.now().strftime("%Y%m%d_%H%M%S")
 
+ts = timestamp()
+
 print(REPO_ROOT)
 PHASE_A_ENTRY = REPO_ROOT / "scripts" / "run_failure_aggregation_v1.sh"
-EXP_DIR = (REPO_ROOT / "phase_b" / "experiments" / f"day17_call_{timestamp()}")
+EXP_DIR = (REPO_ROOT / "phase_b" / "experiments" / f"day17_call_{ts}")
 EXP_DIR.mkdir(parents=True, exist_ok=True)
 shutil.copyfile(CONFIG_PATH, EXP_DIR / "config_snapshot.json")
 
@@ -26,6 +28,18 @@ proc = subprocess.run(
     stderr = subprocess.PIPE,
     cwd = str(REPO_ROOT),
 )
+
+# 2) after proc: build minimal manifest dict
+manifest = {
+    "timestamp": ts,
+    "phase_a_entry": "scripts/run_failure_aggregation_v1.sh",
+    "config_snapshot": "config_snapshot.json",
+    "returncode": proc.returncode,
+}
+
+# 3) dump to EXP_DIR/run_manifest.json
+with open(EXP_DIR / "run_manifest.json","w") as f:
+          json.dump(manifest, f)
 
 print("returncode: ", proc.returncode)
 (EXP_DIR / "returncode.txt").write_text(str(proc.returncode))
